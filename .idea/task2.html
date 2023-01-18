@@ -1,0 +1,69 @@
+<html>
+<head>
+    <title>Project for school</title>
+    <link rel="stylesheet" href="task.css">
+</head>
+<body>
+<div class="quiz-container" id="quiz">
+    <div class="quiz-header">
+<nav>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="task1.html" class="nav-link">Task 1</a>
+    <a href="task2.html" class="nav-link">Task 2</a>
+    <a href="task3.html" class="nav-link">Task 3</a>
+</nav>
+<form>
+    <label>
+        <input type="radio" name="question1" value="option1" correct> Option 1
+    </label>
+    <br>
+    <label>
+        <input type="radio" name="question1" value="option2" > Option 2
+    </label>
+    <br>
+    <form action="task1.html">
+        <div>
+            <input type="submit" value="PREVIOUS"/>
+        </div>
+    </form>
+    <form action="task3.html">
+        <div>
+            <input type="submit" value="NEXT"/>
+        </div>
+    </form>
+    <h3>1 Task left</h3>
+        </form>
+    </div>
+</div>
+<script>
+
+    const form = document.querySelector('form');
+    const radioButtons = form.querySelectorAll('input[type="radio"]');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        for (let button of radioButtons) {
+            if (button.checked) {
+                if (button.hasAttribute("correct")) {
+                    alert("Correct answer!");
+                } else {
+                    alert("Incorrect answer.");
+                }
+            }
+        }
+    });
+
+
+    const links = document.querySelectorAll('.nav-link');
+
+    links.forEach(link => {
+        const currentUrl = window.location.pathname;
+        const linkUrl = link.getAttribute('href');
+        if (currentUrl.includes(linkUrl)) {
+            link.classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

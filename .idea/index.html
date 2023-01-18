@@ -1,0 +1,39 @@
+<html>
+<head>
+    <title>Project for school</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<div class="quiz-container" id="quiz">
+    <div class="quiz-header">
+<nav>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="task1.html" class="nav-link">Task 1</a>
+    <a href="task2.html" class="nav-link">Task 2</a>
+    <a href="task3.html" class="nav-link">Task 3</a>
+
+    <h1>Welcome to our test.</h1>
+    <p>
+        You can start, when you click on the start button
+    </p>
+    <form action="task1.html">
+        <div>
+            <input type="submit" value="START"/>
+        </div>
+    </form>
+</nav>
+    </div>
+</div>
+<script>
+    const links = document.querySelectorAll('.nav-link');
+
+    links.forEach(link => {
+        const currentUrl = window.location.pathname;
+        const linkUrl = link.getAttribute('href');
+        if (currentUrl.includes(linkUrl)) {
+            link.classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

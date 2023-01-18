@@ -1,0 +1,63 @@
+<html>
+<head>
+    <title>Project for school</title>
+    <link rel="stylesheet" href="task.css">
+
+</head>
+<body>
+<div class="quiz-container" id="quiz">
+    <div class="quiz-header">
+<nav>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="task1.html" class="nav-link">Task 1</a>
+    <a href="task2.html" class="nav-link">Task 2</a>
+    <a href="task3.html" class="nav-link">Task 3</a>
+</nav>
+
+
+<form>
+    <input type="text" id="textField">
+</form>
+        <br>
+        <form action="task2.html">
+            <div>
+                <input type="submit" value="PREVIOUS"/>
+            </div>
+        </form>
+        <form action="end.html">
+            <div>
+                <input type="submit" value="NEXT"/>
+            </div>
+        </form>
+<h3>0 Task left</h3>
+    </div>
+</div>
+<script>
+
+    const form = document.querySelector('form');
+    const textField = document.querySelector('#textField');
+
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (textField.value.trim() === "") {
+            alert("Please enter a value in the text field.");
+        } else {
+            // Your code to submit the form or do other things
+        }
+    });
+
+
+
+    const links = document.querySelectorAll('.nav-link');
+
+    links.forEach(link => {
+        const currentUrl = window.location.pathname;
+        const linkUrl = link.getAttribute('href');
+        if (currentUrl.includes(linkUrl)) {
+            link.classList.add('active');
+        }
+    });
+</script>
+</body>
+</html>

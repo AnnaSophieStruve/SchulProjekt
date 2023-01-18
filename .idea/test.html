@@ -1,0 +1,29 @@
+<form>
+    <label>
+        <input type="radio" name="question1" value="option1" correct> Option 1
+    </label>
+    <label>
+        <input type="radio" name="question1" value="option2" incorrect> Option 2
+    </label>
+    <label>
+        <input type="radio" name="question1" value="option3" incorrect> Option 3
+    </label>
+    <button type="submit">Submit</button>
+</form>
+<script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const correctAnswers = Array.from(form.querySelectorAll('input[correct]'))
+            .map(input => input.value);
+        const selectedAnswers = Array.from(form.querySelectorAll('input[name="question1"]:checked'))
+            .map(input => input.value);
+        const isCorrect = selectedAnswers.every(answer => correctAnswers.includes(answer));
+        if (isCorrect) {
+            alert('Congratulations, all answers are correct!');
+            // code to send the result to server
+        } else {
+            alert('Some answers are incorrect, please try again.');
+        }
+    });
+</script>

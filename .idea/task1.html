@@ -1,0 +1,161 @@
+<html>
+<head>
+    <title>Project for school</title>
+    <link rel="stylesheet" href="task.css">
+</head>
+<body>
+<div class="quiz-container" id="quiz">
+    <div class="quiz-header">
+<nav>
+    <a href="index.html" class="nav-link">Home</a>
+    <a href="task1.html" class="nav-link">Task 1</a>
+    <a href="task2.html" class="nav-link">Task 2</a>
+    <a href="task3.html" class="nav-link">Task 3</a>
+</nav>
+
+<form>
+    <h2 id="question">Question Text</h2>
+    <ul>
+        <li>
+            <input type="radio" name="question1" id="a" class="answer">
+            <label for="a" id="a_text">Answer</label>
+        </li>
+        <li>
+            <input type="radio" name="question1"id="b" class="answer">
+            <label for="b" id="b_text">Answer</label>
+        </li>
+        <li>
+            <input type="radio" name="question1" id="c" class="answer">
+            <label for="c" id="c_text">Answer</label>
+        </li>
+        <li>
+            <input type="radio" name="question1" id="d" class="answer">
+            <label for="d" id="d_text">Answer</label>
+        </li>
+    </ul>
+    <form action="index.html">
+        <div>
+            <input type="submit" value="PREVIOUS"/>
+        </div>
+    </form>
+    <form action="task2.html">
+        <div>
+            <input type="submit" value="NEXT"/>
+        </div>
+    </form>
+
+<h3>2 Tasks left</h3>
+</form>
+    </div>
+</div>
+
+
+<script>
+    const quizData = [
+        {
+            question: "Which language runs in a web browser?",
+            a: "Java",
+            b: "C",
+            c: "Python",
+            d: "javascript",
+            correct: "d",
+        },
+    ];
+    const quiz= document.getElementById('quiz')
+    const answerEls = document.querySelectorAll('.question1')
+    const questionEl = document.getElementById('question')
+    const a_text = document.getElementById('a_text')
+    const b_text = document.getElementById('b_text')
+    const c_text = document.getElementById('c_text')
+    const d_text = document.getElementById('d_text')
+    const backBtn = document.getElementById('back')
+    const submitBtn = document.getElementById('submit')
+    let currentQuiz = 0
+    let score = 0
+    loadQuiz()
+    function loadQuiz() {
+        deselectAnswers()
+        const currentQuizData = quizData[currentQuiz]
+        questionEl.innerText = currentQuizData.question
+        a_text.innerText = currentQuizData.a
+        b_text.innerText = currentQuizData.b
+        c_text.innerText = currentQuizData.c
+        d_text.innerText = currentQuizData.d
+    }
+    function deselectAnswers() {
+        answerEls.forEach(answerEl => answerEl.checked = false)
+    }
+    function getSelected() {
+        let answer
+        answerEls.forEach(answerEl => {
+            if(answerEl.checked) {
+                answer = answerEl.id
+            }
+        })
+        return answer
+    }
+    submitBtn.addEventListener('click', () => {
+        const answer = getSelected()
+        if(answer) {
+            if(answer === quizData[currentQuiz].correct) {
+                score++
+            }
+            currentQuiz++
+            if(currentQuiz < quizData.length) {
+                loadQuiz()
+            } else {
+                quiz.innerHTML = `
+           <h2>You answered ${score}/${quizData.length} questions correctly</h2>
+           <button onclick="location.reload()">Reload</button>
+           `
+            }
+        }
+    })
+
+    backBtn.addEventListener('click', () => {
+        javascript:history.back()
+    })
+
+
+
+
+
+
+
+
+
+    let answers = [];
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+
+        // check if any answer is selected or not
+        const selectedAnswers = Array.from(form.querySelectorAll('input[name="question1"]:checked'));
+        if (selectedAnswers.length == 0) {
+            alert('Please select an answer before submitting.');
+            return;
+        }
+
+        // check if the selected answer is correct or not
+        const selectedAnswer = selectedAnswers[0].value;
+        if (selectedAnswer === "option1") {
+            alert('Congratulations, your answer is correct!');
+            answers.push({question: "question1", answer: selectedAnswer, isCorrect: true});
+        } else {
+            alert('Your answer is incorrect, please try again.');
+            answers.push({question: "question1", answer: selectedAnswer, isCorrect: false});
+        }
+    });
+
+    const links = document.querySelectorAll('.nav-link');
+
+    links.forEach(link => {
+        const currentUrl = window.location.pathname;
+        const linkUrl = link.getAttribute('href');
+        if (currentUrl.includes(linkUrl)) {
+            link.classList.add('active');
+        }
+    });
+</script>
+</body>
